@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		734D9F851C452A0C00CF8D0A /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734D9F841C452A0C00CF8D0A /* TableViewController.swift */; };
+		734D9F871C452F9100CF8D0A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 734D9F861C452F9100CF8D0A /* CoreLocation.framework */; };
 		73D962461C45090000F24230 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D962451C45090000F24230 /* AppDelegate.swift */; };
 		73D962481C45090000F24230 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D962471C45090000F24230 /* ViewController.swift */; };
 		73D9624B1C45090000F24230 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73D962491C45090000F24230 /* Main.storyboard */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		734D9F841C452A0C00CF8D0A /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		734D9F861C452F9100CF8D0A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		73D962421C45090000F24230 /* Favorite Places.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Favorite Places.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		73D962451C45090000F24230 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		73D962471C45090000F24230 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				734D9F871C452F9100CF8D0A /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +82,7 @@
 		73D962391C45090000F24230 = {
 			isa = PBXGroup;
 			children = (
+				734D9F861C452F9100CF8D0A /* CoreLocation.framework */,
 				73D962441C45090000F24230 /* Favorite Places */,
 				73D962591C45090000F24230 /* Favorite PlacesTests */,
 				73D962641C45090000F24230 /* Favorite PlacesUITests */,
