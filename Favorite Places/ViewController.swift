@@ -22,8 +22,34 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         manager = CLLocationManager()
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest
-        manager.requestWhenInUseAuthorization()
-        manager.startUpdatingLocation()
+
+
+        if activePlace == -1 {
+           
+            manager.requestWhenInUseAuthorization()
+            manager.startUpdatingLocation()
+
+        } else {
+            
+            let latitude = NSString(string: places[activePlace]["lat"]!).doubleValue
+            let longitude = NSString(string: places[activePlace]["lon"]!).doubleValue
+            
+            let latDelta:CLLocationDegrees = 0.01
+            let lonDelta:CLLocationDegrees = 0.01
+            
+            let coordinate:CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longitude)
+            let span:MKCoordinateSpan = MKCoordinateSpanMake(latDelta, lonDelta)
+            let region:MKCoordinateRegion = MKCoordinateRegionMake(coordinate, span)
+            
+            self.map.setRegion(region, animated: true)
+            
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = coordinate
+            annotation.title = places[activePlace]["name"]
+            self.map.addAnnotation(annotation)
+            
+        }
+        
         
         let uilpgr = UILongPressGestureRecognizer(target: self, action: "action:")
         uilpgr.minimumPressDuration = 1.5
@@ -81,9 +107,19 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                         }
                         
                         title1 = "\(subThoroughfare) \(throughfare)"
-                        print(title1)
                         
                     }
+
+                    if title1 == "" {
+                        
+                        title1 = "Added\(NSDate())"
+                        
+                    }
+
+                    places.append(["name":title1, "lat":"\(newCoordinate.latitude)", "lon":"\(newCoordinate.longitude)"])
+                    print(places)
+                    
+                    NSUserDefaults.standardUserDefaults().setObject(places, forKey: "savedPlaces")
                     
                     let annotation = MKPointAnnotation()
                     annotation.coordinate = newCoordinate
@@ -91,12 +127,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                     self.map.addAnnotation(annotation)
                 }
                 
-                if title1 == "" {
-                    
-                    title1 = "Added\(NSDate())"
-                    print(title1)
-                    
-                }
                 
             })
             

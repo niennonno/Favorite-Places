@@ -8,16 +8,29 @@
 
 import UIKit
 
+var places = [Dictionary<String,String>()]
+
+var activePlace = -1
+
 class TableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        if places.count == 1 {
+            
+            places.removeAtIndex(0)
+            places.append(["name":"Test", "lat": "75.325412", "lon":"85.231455"])
+        
+        }
+        
+        if NSUserDefaults.standardUserDefaults().objectForKey("savedPlaces") != nil {
+            
+            places = NSUserDefaults.standardUserDefaults().objectForKey("savedPlaces") as! [Dictionary<String, String>]
+            
+        }
+        
+      self.tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,19 +46,37 @@ class TableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 3
+    
+        return places.count
+    
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
     
-        cell.textLabel?.text = "Test"
+        cell.textLabel?.text = places[indexPath.row]["name"]
         
         return cell
     }
     
+    override func viewWillAppear(animated: Bool) {
+        self.tableView.reloadData()
+    }
 
+    override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+
+        activePlace = indexPath.row
+        return indexPath
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "newPlace" {
+            activePlace = -1
+        }
+        
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
